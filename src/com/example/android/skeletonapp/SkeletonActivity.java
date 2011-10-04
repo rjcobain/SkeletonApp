@@ -25,20 +25,42 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
+
 
 /**
  * This class provides a basic demonstration of how to write an Android
  * activity. Inside of its window, it places a single view: an EditText that
  * displays and edits some internal text.
  */
-public class SkeletonActivity extends Activity {
+public class SkeletonActivity extends Activity implements SensorEventListener {
     
     static final private int BACK_ID = Menu.FIRST;
     static final private int CLEAR_ID = Menu.FIRST + 1;
 
     private EditText mEditor;
     
+    private SensorManager mSensorManager;
+    
+    private Sensor mMagnetometer;
+
+    
+    public void onSensorChanged(SensorEvent event) {
+        if (event.sensor.getType() != Sensor.TYPE_MAGNETIC_FIELD)
+            return;
+        
+        mEditor.setText("Value0=" + event.values[0] + "Value1=" + event.values[1] + "Value2=" + event.values[2]);
+        
+    }
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+    }
+
+    
     public SkeletonActivity() {
+    	
     }
 
     /** Called with the activity is first created. */
@@ -58,6 +80,14 @@ public class SkeletonActivity extends Activity {
         ((Button) findViewById(R.id.clear)).setOnClickListener(mClearListener);
         
         mEditor.setText(getText(R.string.main_label));
+        
+        mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        
+        mMagnetometer = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+        
+        mSensorManager.registerListener(this, mMagnetometer, SensorManager.SENSOR_DELAY_UI);
+
+
     }
 
     /**
