@@ -102,19 +102,19 @@ public class CustomDrawableView extends View implements SensorEventListener {
 		float yscale = 100;
 
 		for (int i = 1; i < tempx.length; i++) {
-			pathx.lineTo(i*3, (x[i] - x[i - 1])*yscale);
+			pathx.lineTo(i*3, (tempx[i] - tempx[i - 1])*yscale);
 			
 
 		}
 
 		for (int i = 1; i < tempy.length; i++) {
-			pathy.lineTo(i*3, (y[i] - y[i - 1])*yscale);
+			pathy.lineTo(i*3, (tempy[i] - tempy[i - 1])*yscale);
 			
 
 		}
 
 		for (int i = 1; i < tempz.length; i++) {
-			pathz.lineTo(i*3, (z[i] - z[i - 1])*yscale);
+			pathz.lineTo(i*3, (tempz[i] - tempz[i - 1])*yscale);
 			
 
 		}
