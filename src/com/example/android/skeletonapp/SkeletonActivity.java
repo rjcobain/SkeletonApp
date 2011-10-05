@@ -18,17 +18,16 @@ package com.example.android.skeletonapp;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.KeyEvent;
+//import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.EditText;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
+//import android.widget.EditText;
+import com.example.android.skeletonapp.CustomDrawableView;
+
+
 
 
 /**
@@ -36,27 +35,18 @@ import android.hardware.SensorManager;
  * activity. Inside of its window, it places a single view: an EditText that
  * displays and edits some internal text.
  */
-public class SkeletonActivity extends Activity implements SensorEventListener {
+public class SkeletonActivity extends Activity {
     
     static final private int BACK_ID = Menu.FIRST;
     static final private int CLEAR_ID = Menu.FIRST + 1;
 
-    private EditText mEditor;
+    //private EditText mEditor;
     
-    private SensorManager mSensorManager;
-    
-    private Sensor mMagnetometer;
+   
+    CustomDrawableView mCustomDrawableView;
 
     
-    public void onSensorChanged(SensorEvent event) {
-        if (event.sensor.getType() != Sensor.TYPE_MAGNETIC_FIELD)
-            return;
-        
-        mEditor.setText("Value0=" + event.values[0] + "Value1=" + event.values[1] + "Value2=" + event.values[2]);
-        
-    }
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
-    }
+   
 
     
     public SkeletonActivity() {
@@ -69,23 +59,22 @@ public class SkeletonActivity extends Activity implements SensorEventListener {
         super.onCreate(savedInstanceState);
 
         // Inflate our UI from its XML layout description.
-        setContentView(R.layout.skeleton_activity);
+        //setContentView(R.layout.skeleton_activity);
+        mCustomDrawableView = new CustomDrawableView(this);
+        
+        setContentView(mCustomDrawableView);
 
         // Find the text editor view inside the layout, because we
         // want to do various programmatic things with it.
-        mEditor = (EditText) findViewById(R.id.editor);
+       // mEditor = (EditText) findViewById(R.id.editor);
 
         // Hook up button presses to the appropriate event handler.
-        ((Button) findViewById(R.id.back)).setOnClickListener(mBackListener);
-        ((Button) findViewById(R.id.clear)).setOnClickListener(mClearListener);
+        //((Button) findViewById(R.id.back)).setOnClickListener(mBackListener);
+        //((Button) findViewById(R.id.clear)).setOnClickListener(mClearListener);
         
-        mEditor.setText(getText(R.string.main_label));
+       // mEditor.setText(getText(R.string.main_label));
         
-        mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        
-        mMagnetometer = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
-        
-        mSensorManager.registerListener(this, mMagnetometer, SensorManager.SENSOR_DELAY_UI);
+       
 
 
     }
@@ -123,7 +112,7 @@ public class SkeletonActivity extends Activity implements SensorEventListener {
 
         // Before showing the menu, we need to decide whether the clear
         // item is enabled depending on whether there is text to clear.
-        menu.findItem(CLEAR_ID).setVisible(mEditor.getText().length() > 0);
+       // menu.findItem(CLEAR_ID).setVisible(mEditor.getText().length() > 0);
 
         return true;
     }
@@ -138,7 +127,7 @@ public class SkeletonActivity extends Activity implements SensorEventListener {
             finish();
             return true;
         case CLEAR_ID:
-            mEditor.setText("");
+            //mEditor.setText("");
             return true;
         }
 
@@ -159,7 +148,7 @@ public class SkeletonActivity extends Activity implements SensorEventListener {
      */
     OnClickListener mClearListener = new OnClickListener() {
         public void onClick(View v) {
-            mEditor.setText("");
+            //mEditor.setText("");
         }
     };
 }
