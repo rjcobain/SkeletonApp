@@ -2,6 +2,7 @@ package com.example.android.skeletonapp;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
@@ -57,14 +58,17 @@ public class CustomDrawableView extends View implements SensorEventListener {
 
 		mDrawablex = new ShapeDrawable(new PathShape(pathx, 160,120));
 		mDrawablex.getPaint().setColor(0xff74AC23);
+		mDrawablex.getPaint().setStyle(Paint.Style.STROKE);
 		mDrawablex.setBounds(0, 60, 240, 159);
-
+		
 		mDrawabley = new ShapeDrawable(new PathShape(pathy, 160,120));
 		mDrawabley.getPaint().setColor(0xff74AC23);
+		mDrawabley.getPaint().setStyle(Paint.Style.STROKE);
 		mDrawabley.setBounds(0, 160, 240, 259);
 
 		mDrawablez = new ShapeDrawable(new PathShape(pathz, 160,120));
 		mDrawablez.getPaint().setColor(0xff74AC23);
+		mDrawablez.getPaint().setStyle(Paint.Style.STROKE);
 		mDrawablez.setBounds(0, 260, 240, 320);
 
 	}
@@ -92,6 +96,8 @@ public class CustomDrawableView extends View implements SensorEventListener {
 		pathx.rewind();
 		pathy.rewind();
 		pathz.rewind();
+		
+		
 		
 		float yscale = 100;
 
